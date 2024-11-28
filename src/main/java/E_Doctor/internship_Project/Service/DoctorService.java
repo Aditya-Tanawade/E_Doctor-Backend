@@ -12,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Data
 public class DoctorService {
@@ -33,7 +35,6 @@ public class DoctorService {
         Doctor doctor = new Doctor();
          registerEmail= registerUserDTo.getEmail();
          doctor.setEmail(registerUserDTo.getEmail());
-         doctor.setPassword(passwordEncoder.encode(registerUserDTo.getPassword()));
         doctorRepository.save(doctor);
     }
 
@@ -90,6 +91,39 @@ public class DoctorService {
         return doctorRepository.findByEmail(loginEmail)
                 .orElse(null); // Return null if doctor is not found
     }
+
+    public List<Doctor> getAllDoctors() {
+        return doctorRepository.findAll();
+    }
+
+
+//    public ResponseEntity<ApiError> getAllDoctors() {
+//        List<Doctor> doctors = doctorRepository.findAll();
+//        if (!doctors.isEmpty()) {
+//            return ResponseEntity.ok(
+//                    ApiError.builder()
+//                            .status(HttpStatus.OK)
+//                            .message("Doctors fetched successfully")
+//                            .subErrors(doctors.stream().map(Doctor::toString).toList())
+//                            .build()
+//            );
+//        } else {
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+//                    ApiError.builder()
+//                            .status(HttpStatus.NOT_FOUND)
+//                            .message("No doctors found")
+//                            .build()
+//            );
+//        }
+//}
+
+
+
+
+
+
+
+
 
 
 }

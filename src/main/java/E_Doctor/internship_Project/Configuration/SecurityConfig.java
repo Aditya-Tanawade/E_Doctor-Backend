@@ -35,7 +35,7 @@ public class SecurityConfig {
                         authorizeRequests
 
                                 .requestMatchers("/api/auth/**").permitAll()
-                                .requestMatchers("/api/doctor/**").permitAll() // Use 'hasAuthority' to skip the 'ROLE_' prefix
+                                .requestMatchers("/api/doctor/**","/api/doctor/availability/**").permitAll() // Use 'hasAuthority' to skip the 'ROLE_' prefix
                                 .anyRequest().authenticated())
                                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                                 .logout(logout -> logout

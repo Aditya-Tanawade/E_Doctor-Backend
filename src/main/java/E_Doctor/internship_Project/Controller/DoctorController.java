@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -45,7 +46,10 @@ public class DoctorController {
     }
 
 
-
-
+    @GetMapping("/get-all-doctors")
+    public ResponseEntity<List<Doctor>> getAllDoctors() {
+        List<Doctor> doctors = doctorService.getAllDoctors(); // Ensure this service is returning valid data
+        return ResponseEntity.ok(doctors);
+    }
 
 }
